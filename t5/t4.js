@@ -1,7 +1,6 @@
 'use strict';
 
-// eslint-disable-next-line no-unused-vars
-async function fetchData(url, options) {
+const fetchData = async (url, options) => {
   const response = await fetch(url, options);
   const json = await response.json();
   if (!response.ok && json.message) {
@@ -10,4 +9,6 @@ async function fetchData(url, options) {
     throw new Error('Virhe: ' + response.statusText);
   }
   return json;
-}
+};
+
+export {fetchData};

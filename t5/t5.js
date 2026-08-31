@@ -1,3 +1,6 @@
+import {restaurantRow} from './components.js';
+import {fetchData} from './t4.js';
+
 const apiURL = 'https://media1.edu.metropolia.fi/restaurant/api/v1';
 
 const menuDialog = document.querySelector('#menu');
@@ -19,7 +22,6 @@ const distance = (restaurantLocation, myLocation) => {
 
 async function getRestaurants() {
   try {
-    // eslint-disable-next-line no-undef
     restaurants = await fetchData(apiURL + '/restaurants');
     navigator.geolocation.getCurrentPosition(success, error, options);
   } catch (error) {
@@ -31,22 +33,7 @@ function renderRestaurants() {
   const target = document.querySelector('table');
 
   for (const restaurant of restaurants) {
-    const {name, address, company, city, phone, _id} = restaurant;
-    const tr = document.createElement('tr');
-
-    const nameTd = document.createElement('td');
-    nameTd.innerText = name;
-
-    const addressTd = document.createElement('td');
-    addressTd.innerText = address;
-
-    const companyTd = document.createElement('td');
-    companyTd.innerText = company;
-
-    const cityTd = document.createElement('td');
-    cityTd.innerText = city;
-
-    tr.append(nameTd, addressTd, companyTd, cityTd);
+    const tr = restaurantRow(restaurant);
 
     // klikkieventti, näytä ravintolan tiedot dialogissa
     tr.addEventListener('click', async () => {
@@ -68,13 +55,12 @@ function renderRestaurants() {
       let modalHTMl = `
       <div>
       <h3>${name}</h3>
-      <p>${phone === '-' ? 'Ei puhelinta' : phone}</p>
+      <p>${restaurant.phone === '-' ? 'Ei puhelinta' : restaurant.phone}</p>
       </div>
       `;
       // hae päivän menu ***
-      // eslint-disable-next-line no-undef
       const dailyMenu = await fetchData(
-        `${apiURL}/restaurants/daily/${_id}/fi`
+        `${apiURL}/restaurants/daily/${restaurant._id}/fi`
       );
       console.log(dailyMenu.courses);
       modalHTMl += `
