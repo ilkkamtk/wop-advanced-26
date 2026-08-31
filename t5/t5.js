@@ -31,19 +31,20 @@ function renderRestaurants() {
   const target = document.querySelector('table');
 
   for (const restaurant of restaurants) {
+    const {name, address, company, city, phone, _id} = restaurant;
     const tr = document.createElement('tr');
 
     const nameTd = document.createElement('td');
-    nameTd.innerText = restaurant.name;
+    nameTd.innerText = name;
 
     const addressTd = document.createElement('td');
-    addressTd.innerText = restaurant.address;
+    addressTd.innerText = address;
 
     const companyTd = document.createElement('td');
-    companyTd.innerText = restaurant.company;
+    companyTd.innerText = company;
 
     const cityTd = document.createElement('td');
-    cityTd.innerText = restaurant.city;
+    cityTd.innerText = city;
 
     tr.append(nameTd, addressTd, companyTd, cityTd);
 
@@ -66,14 +67,14 @@ function renderRestaurants() {
       menuDialog.innerHTML = '';
       let modalHTMl = `
       <div>
-      <h3>${restaurant.name}</h3>
-      <p>${restaurant.phone === '-' ? 'Ei puhelinta' : restaurant.phone}</p>
+      <h3>${name}</h3>
+      <p>${phone === '-' ? 'Ei puhelinta' : phone}</p>
       </div>
       `;
       // hae päivän menu ***
       // eslint-disable-next-line no-undef
       const dailyMenu = await fetchData(
-        `${apiURL}/restaurants/daily/${restaurant._id}/fi`
+        `${apiURL}/restaurants/daily/${_id}/fi`
       );
       console.log(dailyMenu.courses);
       modalHTMl += `
@@ -85,11 +86,12 @@ function renderRestaurants() {
         </tr>
        `;
       for (const course of dailyMenu.courses) {
+        const {name, price, diets} = course;
         modalHTMl += `
           <tr>
-            <td>${course.name}</td>
-            <td>${course.price}</td>
-            <td>${course.diets}</td>
+            <td>${name}</td>
+            <td>${price ?? 'Ei hintaa'}</td>
+            <td>${diets}</td>
           </tr>
         `;
       }
