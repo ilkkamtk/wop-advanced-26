@@ -134,3 +134,19 @@ function error(err) {
 }
 
 getRestaurants();
+
+// ravintoloiden filtteröinti
+
+document.querySelector('#compass-button').addEventListener('click', () => {
+  // const compassRestaurants = restaurants.filter((restaurant) => {
+  //   if (restaurant.company === 'Compass Group') {
+  //     return true;
+  //   }
+  // });
+
+  const compassRestaurants = restaurants.filter(
+    (restaurant) => restaurant.company === 'Compass Group'
+  );
+
+  renderRestaurants(compassRestaurants);
+});
