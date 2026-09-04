@@ -32,14 +32,14 @@ async function getRestaurants() {
 function renderRestaurants() {
   const target = document.querySelector('table');
 
-  for (const restaurant of restaurants) {
+  restaurants.forEach((restaurant) => {
     const tr = restaurantRow(restaurant);
 
     // klikkieventti, näytä ravintolan tiedot dialogissa
     tr.addEventListener('click', async () => {
-      for (const rivi of document.querySelectorAll('tr')) {
+      document.querySelectorAll('tr').forEach((rivi) => {
         rivi.classList.remove('highlight');
-      }
+      });
 
       tr.classList.add('highlight');
 
@@ -71,7 +71,7 @@ function renderRestaurants() {
           <th>Diets</th>
         </tr>
        `;
-      for (const course of dailyMenu.courses) {
+      dailyMenu.courses.forEach((course) => {
         const {name, price, diets} = course;
         modalHTMl += `
           <tr>
@@ -80,7 +80,8 @@ function renderRestaurants() {
             <td>${diets}</td>
           </tr>
         `;
-      }
+      });
+
       modalHTMl += '</table>';
 
       console.log(modalHTMl);
@@ -90,7 +91,7 @@ function renderRestaurants() {
     });
 
     target.append(tr);
-  }
+  });
 }
 
 // A function that is called when location information is retrieved
