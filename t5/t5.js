@@ -29,10 +29,10 @@ async function getRestaurants() {
   }
 }
 
-function renderRestaurants() {
+function renderRestaurants(restaurantsArray) {
   const target = document.querySelector('table');
 
-  restaurants.forEach((restaurant) => {
+  restaurantsArray.forEach((restaurant) => {
     const tr = restaurantRow(restaurant);
 
     // klikkieventti, näytä ravintolan tiedot dialogissa
@@ -124,13 +124,13 @@ function success(pos) {
 
     return etaisyysA - etaisyysB;
   });
-  renderRestaurants();
+  renderRestaurants(restaurants);
 }
 
 // Function to be called if an error occurs while retrieving location information
 function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
-  renderRestaurants();
+  renderRestaurants(restaurants);
 }
 
 getRestaurants();
