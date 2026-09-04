@@ -51,8 +51,9 @@ function renderRestaurants(restaurantsArray) {
       // } else {
       //   puhelin = restaurant.phone;
       // }
+      const menuContent = document.querySelector('#menu-content');
+      menuContent.innerHTML = '';
 
-      menuDialog.innerHTML = '';
       let modalHTMl = `
       <div>
       <h3>${name}</h3>
@@ -97,7 +98,7 @@ function renderRestaurants(restaurantsArray) {
 
       console.log(modalHTMl);
       // *******************
-      menuDialog.insertAdjacentHTML('beforeend', modalHTMl);
+      menuContent.insertAdjacentHTML('beforeend', modalHTMl);
       menuDialog.showModal();
     });
 
@@ -160,4 +161,12 @@ document.querySelector('#sodexo-button').addEventListener('click', () => {
   );
 
   renderRestaurants(sodexoRestaurants);
+});
+
+document.querySelector('#reset-button').addEventListener('click', () => {
+  renderRestaurants(restaurants);
+});
+
+document.querySelector('#close-button').addEventListener('click', () => {
+  menuDialog.close();
 });
