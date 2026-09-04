@@ -30,7 +30,8 @@ async function getRestaurants() {
 }
 
 function renderRestaurants(restaurantsArray) {
-  const target = document.querySelector('table');
+  const target = document.querySelector('tbody');
+  target.innerHTML = '';
 
   restaurantsArray.forEach((restaurant) => {
     const tr = restaurantRow(restaurant);
@@ -139,9 +140,7 @@ getRestaurants();
 
 document.querySelector('#compass-button').addEventListener('click', () => {
   // const compassRestaurants = restaurants.filter((restaurant) => {
-  //   if (restaurant.company === 'Compass Group') {
-  //     return true;
-  //   }
+  //   return restaurant.company === 'Compass Group');
   // });
 
   const compassRestaurants = restaurants.filter(
@@ -149,4 +148,16 @@ document.querySelector('#compass-button').addEventListener('click', () => {
   );
 
   renderRestaurants(compassRestaurants);
+});
+
+document.querySelector('#sodexo-button').addEventListener('click', () => {
+  // const sodexoRestaurants = restaurants.filter((restaurant) => {
+  //   return restaurant.company === 'Compass Group');
+  // });
+
+  const sodexoRestaurants = restaurants.filter(
+    (restaurant) => restaurant.company === 'Sodexo'
+  );
+
+  renderRestaurants(sodexoRestaurants);
 });
