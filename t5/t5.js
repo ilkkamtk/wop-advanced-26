@@ -1,6 +1,17 @@
 import {restaurantRow} from './components.js';
 import {fetchData} from './t4.js';
 
+(async () => {
+  if ('serviceWorker' in navigator) {
+    try {
+      const worker = await navigator.serviceWorker.register('./sw.js');
+      console.log('Service Worker Registered', worker);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+})();
+
 const apiURL = 'https://media1.edu.metropolia.fi/restaurant/api/v1';
 
 const menuDialog = document.querySelector('#menu');
