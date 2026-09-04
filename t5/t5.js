@@ -72,12 +72,19 @@ function renderRestaurants() {
         </tr>
        `;
       dailyMenu.courses.forEach((course) => {
+        console.log(course);
         const {name, price, diets} = course;
         modalHTMl += `
           <tr>
             <td>${name}</td>
             <td>${price ?? 'Ei hintaa'}</td>
-            <td>${diets}</td>
+            <td>${diets.map((diet) => {
+              if (diet === 'ILM') {
+                return '&#9760;';
+              } else {
+                return diet;
+              }
+            })}</td>
           </tr>
         `;
       });
