@@ -79,10 +79,13 @@ function renderRestaurants() {
             <td>${name}</td>
             <td>${price ?? 'Ei hintaa'}</td>
             <td>${diets.map((diet) => {
-              if (diet === 'ILM') {
-                return '&#9760;';
-              } else {
-                return diet;
+              switch (diet) {
+                case 'ILM':
+                  return '&#9760;';
+                case 'L':
+                  return '&#128004;';
+                default:
+                  return diet;
               }
             })}</td>
           </tr>
