@@ -161,3 +161,7 @@ document.querySelector('#sodexo-button').addEventListener('click', () => {
 
   renderRestaurants(sodexoRestaurants);
 });
+
+document.querySelector('#reset-button').addEventListener('click', () => {
+  renderRestaurants(restaurants);
+});
